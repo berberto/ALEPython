@@ -646,6 +646,9 @@ def ale_plot(
     monte_carlo_rep=50,
     monte_carlo_ratio=0.1,
     rugplot_lim=1000,
+    fig = None,
+    ax = None,
+    show = False,
 ):
     """Plots ALE function of specified features based on training set.
 
@@ -696,7 +699,8 @@ def ale_plot(
     if features_classes is not None:
         raise NotImplementedError("'features_classes' is not implemented yet.")
 
-    fig, ax = plt.subplots()
+    if fig is None or ax is None:
+        fig, ax = plt.subplots()
 
     features = _parse_features(features)
 
@@ -785,5 +789,8 @@ def ale_plot(
                 n_feat=len(features)
             )
         )
-    plt.show()
+
+    if show:
+        plt.show()
+        
     return ax
